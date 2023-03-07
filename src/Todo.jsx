@@ -1,5 +1,6 @@
 import React from "react";
 import useToggleState from "./hooks/UseToggleState";
+import EditTodoForm from "./EditTodoForm";
 import {
   ListItem,
   ListItemText,
@@ -9,12 +10,12 @@ import {
 } from "@mui/material";
 import { DeleteOutline, EditOutlined } from "@mui/icons-material";
 
-function Todo({ task, completed, id, removeTodo, toggleTodo }) {
+function Todo({ id, task, completed, removeTodo, toggleTodo, editTodo }) {
   const [isEditing, toggle] = useToggleState(false);
   return (
-    <ListItem>
+    <ListItem style={{height: "64px"}}>
       {isEditing ? (
-        <h1>Editing Time!</h1>
+        <EditTodoForm editTodo={editTodo} id={id} task={task} toggleEditForm={toggle} />
       ) : (
         <div>
           <Checkbox

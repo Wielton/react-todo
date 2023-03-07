@@ -5,11 +5,7 @@ import TodoForm from "./TodoForm";
 import { v4 as uuidv4 } from "uuid";
 
 function TodoApp() {
-  const initialToDos = [
-    { id: 1, task: "Make meatballs", completed: false },
-    { id: 2, task: "Mop floors", completed: false },
-    { id: 3, task: "clean dishes", completed: true },
-  ];
+  const initialToDos = [];
   const [toDos, setToDos] = useState(initialToDos);
   const addTodo = (newTodoText) => {
     setToDos([...toDos, { id: uuidv4(), task: newTodoText, completed: false }]);
@@ -26,6 +22,12 @@ function TodoApp() {
     );
     setToDos(updatedToDos);
   };
+const editTodo = (todoId, newTask) => {
+    const updatedToDos = toDos.map((todo) =>
+      todo.id === todoId ? { ...todo, task: newTask } : todo
+    );
+    setToDos(updatedToDos);
+  };
 
   return (
     <Paper
@@ -39,7 +41,7 @@ function TodoApp() {
     >
       <AppBar color="primary" position="static" style={{ height: "64px" }}>
         <Toolbar>
-          <Typography color="inherit">Todo's With Hooks</Typography>
+          <Typography color="inherit">Simple ToDo App</Typography>
         </Toolbar>
       </AppBar>
       <Grid container justify="center" style={{ marginTop: "1rem" }}>
@@ -49,6 +51,7 @@ function TodoApp() {
             toDos={toDos}
             removeTodo={removeTodo}
             toggleTodo={toggleTodo}
+            editTodo={editTodo}
           />
         </Grid>
       </Grid>
